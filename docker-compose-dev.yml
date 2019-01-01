@@ -1,14 +1,15 @@
 version: '3.6'
 
 services:
+
   users:
     build:
       context: ./services/users
       dockerfile: Dockerfile-dev
     volumes:
       - './services/users:/usr/src/app'
-    expose:
-      - '5000'
+    ports:
+      - 5001:5000
     environment:
       - FLASK_ENV=development
       - APP_SETTINGS=project.config.DevelopmentConfig
@@ -22,7 +23,7 @@ services:
       context: ./services/users/project/db
       dockerfile: Dockerfile
     ports:
-      - 5432:5432
+      - 5435:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
