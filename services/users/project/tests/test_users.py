@@ -75,7 +75,10 @@ class TestUserService(BaseTestCase):
             self.assertIn('fail', data['status'])
 
     def test_add_user_invalid_json_keys_no_password(self):
-        """Ensure error is thrown if the JSON object does not have a password key."""
+        """
+        Ensure error is thrown if the JSON object
+        does not have a password key.
+        """
         with self.client:
             response = self.client.post(
                 '/users',
