@@ -2,7 +2,7 @@
 # BUILDER #
 ###########
 
-FROM node:10.4.1-alpine as builder
+FROM node:11.6.0-alpine as builder
 
 WORKDIR /usr/src/app
 
@@ -23,7 +23,10 @@ RUN npm run build
 # FINAL #
 #########
 
-FROM nginx:1.15.0-alpine
+FROM nginx:1.15.8-alpine
+
+RUN rm -rf /etc/nginx/conf.d
+COPY conf /etc/nginx
 
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
