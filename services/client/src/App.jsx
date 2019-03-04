@@ -30,10 +30,15 @@ class App extends Component {
         this.handleUserFormSubmit = this.handleUserFormSubmit.bind(this);
         this.handleFormChange = this.handleFormChange.bind(this);
         this.logoutUser = this.logoutUser.bind(this);
-    }
+    };
     componentDidMount() {
         this.getUsers();
-    }
+    };
+    componentWillMount() {
+        if (window.localStorage.getItem('authToken')) {
+            this.setState({ isAuthenticated: true });
+        }
+    };
     getUsers() {
         axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/users`)
             .then(res => {this.setState({ users: res.data.data.users }); })
